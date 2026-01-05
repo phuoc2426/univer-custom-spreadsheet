@@ -18,7 +18,8 @@
     ],
     "scripts": {
         "build": "tsup",
-        "dev": "tsup --watch"
+        "dev": "tsup --watch",
+        "prepare": "npm run build"
     },
     "dependencies": {
         "@univerjs/core": "^0.6.6",
