@@ -44,6 +44,35 @@
 import type { IWorkbookData, Workbook } from '@univerjs/core';
 import { LocaleType, Univer, UniverInstanceType } from '@univerjs/core';
 import { defaultTheme } from '@univerjs/design';
+
+// Import locale packages
+import DesignEnUS from '@univerjs/design/locale/en-US';
+import DocsUIEnUS from '@univerjs/docs-ui/locale/en-US';
+import SheetsEnUS from '@univerjs/sheets/locale/en-US';
+import SheetsUIEnUS from '@univerjs/sheets-ui/locale/en-US';
+import UIEnUS from '@univerjs/ui/locale/en-US';
+import SheetsFormulaEnUS from '@univerjs/sheets-formula/locale/en-US';
+
+import DesignViVN from '@univerjs/design/locale/vi-VN';
+import DocsUIViVN from '@univerjs/docs-ui/locale/vi-VN';
+import SheetsViVN from '@univerjs/sheets/locale/vi-VN';
+import SheetsUIViVN from '@univerjs/sheets-ui/locale/vi-VN';
+import UIViVN from '@univerjs/ui/locale/vi-VN';
+import SheetsFormulaViVN from '@univerjs/sheets-formula/locale/vi-VN';
+
+import DesignZhCN from '@univerjs/design/locale/zh-CN';
+import DocsUIZhCN from '@univerjs/docs-ui/locale/zh-CN';
+import SheetsZhCN from '@univerjs/sheets/locale/zh-CN';
+import SheetsUIZhCN from '@univerjs/sheets-ui/locale/zh-CN';
+import UIZhCN from '@univerjs/ui/locale/zh-CN';
+import SheetsFormulaZhCN from '@univerjs/sheets-formula/locale/zh-CN';
+
+import DesignRuRU from '@univerjs/design/locale/ru-RU';
+import DocsUIRuRU from '@univerjs/docs-ui/locale/ru-RU';
+import SheetsRuRU from '@univerjs/sheets/locale/ru-RU';
+import SheetsUIRuRU from '@univerjs/sheets-ui/locale/ru-RU';
+import UIRuRU from '@univerjs/ui/locale/ru-RU';
+import SheetsFormulaRuRU from '@univerjs/sheets-formula/locale/ru-RU';
 import { UniverDocsPlugin } from '@univerjs/docs';
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui';
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula';
@@ -159,10 +188,58 @@ export function createSpreadsheet(config: CreateSpreadsheetConfig): SpreadsheetI
 
     const localeType = getLocaleType(pluginConfig.locale);
 
-    // Create Univer instance
+    // Prepare locales based on selected locale
+    const locales: Record<string, any> = {};
+
+    switch (localeType) {
+        case LocaleType.VI_VN:
+            locales[LocaleType.VI_VN] = {
+                ...DesignViVN,
+                ...DocsUIViVN,
+                ...SheetsViVN,
+                ...SheetsUIViVN,
+                ...UIViVN,
+                ...SheetsFormulaViVN,
+            };
+            break;
+        case LocaleType.ZH_CN:
+            locales[LocaleType.ZH_CN] = {
+                ...DesignZhCN,
+                ...DocsUIZhCN,
+                ...SheetsZhCN,
+                ...SheetsUIZhCN,
+                ...UIZhCN,
+                ...SheetsFormulaZhCN,
+            };
+            break;
+        case LocaleType.RU_RU:
+            locales[LocaleType.RU_RU] = {
+                ...DesignRuRU,
+                ...DocsUIRuRU,
+                ...SheetsRuRU,
+                ...SheetsUIRuRU,
+                ...UIRuRU,
+                ...SheetsFormulaRuRU,
+            };
+            break;
+        case LocaleType.EN_US:
+        default:
+            locales[LocaleType.EN_US] = {
+                ...DesignEnUS,
+                ...DocsUIEnUS,
+                ...SheetsEnUS,
+                ...SheetsUIEnUS,
+                ...UIEnUS,
+                ...SheetsFormulaEnUS,
+            };
+            break;
+    }
+
+    // Create Univer instance with locales
     const univer = new Univer({
         theme: defaultTheme,
         locale: localeType,
+        locales,
     });
 
     // Register core plugins
