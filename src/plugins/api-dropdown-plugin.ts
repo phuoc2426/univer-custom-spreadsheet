@@ -27,6 +27,7 @@ import {
     RibbonOthersGroup,
 } from '@univerjs/ui';
 import { showApiDropdownModal } from '../ui/api-dropdown-modal';
+import React from 'react';
 
 /**
  * Convert 2D string array to cell data matrix
@@ -42,14 +43,15 @@ function convertToCellData(data: string[][]): IObjectMatrixPrimitiveType<ICellDa
     return cellData;
 }
 
-// Simple icon component (inline SVG as function)
-const DataIcon = () => {
-    const span = document.createElement('span');
-    span.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M12 2C6.48 2 2 4.02 2 6.5v11C2 19.98 6.48 22 12 22s10-2.02 10-4.5v-11C22 4.02 17.52 2 12 2zm0 2c4.42 0 8 1.57 8 3.5S16.42 11 12 11 4 9.43 4 7.5 7.58 4 12 4zm8 13.5c0 1.93-3.58 3.5-8 3.5s-8-1.57-8-3.5v-2.04c1.77 1.26 4.63 2.04 8 2.04s6.23-.78 8-2.04v2.04zm0-5c0 1.93-3.58 3.5-8 3.5s-8-1.57-8-3.5V10.46c1.77 1.26 4.63 2.04 8 2.04s6.23-.78 8-2.04v2.04z"/>
-    </svg>`;
-    return span;
-};
+// Simple icon component (React component)
+const DataIcon = () =>
+    React.createElement(
+        'svg',
+        { viewBox: '0 0 24 24', width: '16', height: '16', fill: 'currentColor' },
+        React.createElement('path', {
+            d: 'M12 2C6.48 2 2 4.02 2 6.5v11C2 19.98 6.48 22 12 22s10-2.02 10-4.5v-11C22 4.02 17.52 2 12 2zm0 2c4.42 0 8 1.57 8 3.5S16.42 11 12 11 4 9.43 4 7.5 7.58 4 12 4zm8 13.5c0 1.93-3.58 3.5-8 3.5s-8-1.57-8-3.5v-2.04c1.77 1.26 4.63 2.04 8 2.04s6.23-.78 8-2.04v2.04zm0-5c0 1.93-3.58 3.5-8 3.5s-8-1.57-8-3.5V10.46c1.77 1.26 4.63 2.04 8 2.04s6.23-.78 8-2.04v2.04z',
+        })
+    );
 
 export class ApiDropdownPlugin extends Plugin {
     static override pluginName = 'univer-custom-api-dropdown-plugin';
