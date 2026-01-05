@@ -1,0 +1,206 @@
+/**
+ * Univer Custom Spreadsheet Styles
+ * Import this file to include all necessary Univer styles
+ */
+
+/* Core Univer styles are bundled from node_modules */
+@import '@univerjs/design/lib/index.css';
+@import '@univerjs/ui/lib/index.css';
+@import '@univerjs/docs-ui/lib/index.css';
+@import '@univerjs/sheets-ui/lib/index.css';
+@import '@univerjs/sheets-formula/lib/index.css';
+
+/* Custom plugin styles */
+.ucp-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.ucp-modal {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.ucp-modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ucp-modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.ucp-modal-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 4px 8px;
+}
+
+.ucp-modal-close:hover {
+    color: #333;
+}
+
+.ucp-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.ucp-modal-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.ucp-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #d9d9d9;
+    background: white;
+    color: #333;
+    transition: all 0.2s;
+}
+
+.ucp-btn:hover {
+    border-color: #40a9ff;
+    color: #40a9ff;
+}
+
+.ucp-btn-primary {
+    background: #1890ff;
+    border-color: #1890ff;
+    color: white;
+}
+
+.ucp-btn-primary:hover {
+    background: #40a9ff;
+    border-color: #40a9ff;
+    color: white;
+}
+
+.ucp-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.ucp-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.ucp-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.ucp-loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.ucp-error {
+    color: #ff4d4f;
+    padding: 12px;
+    background: #fff2f0;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.ucp-template-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ucp-template-item {
+    padding: 12px 16px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ucp-template-item:hover {
+    border-color: #40a9ff;
+    background: #f0f8ff;
+}
+
+.ucp-template-item.selected {
+    border-color: #1890ff;
+    background: #e6f7ff;
+}
+
+.ucp-template-name {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.ucp-template-description {
+    font-size: 12px;
+    color: #666;
+}
+
+.ucp-file-input {
+    margin-top: 16px;
+}
+
+.ucp-tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 16px;
+}
+
+.ucp-tab {
+    padding: 8px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.ucp-tab:hover {
+    color: #1890ff;
+}
+
+.ucp-tab.active {
+    color: #1890ff;
+    border-bottom-color: #1890ff;
+}

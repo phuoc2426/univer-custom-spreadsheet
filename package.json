@@ -1,0 +1,57 @@
+{
+    "name": "univer-custom-spreadsheet",
+    "version": "1.0.0",
+    "description": "All-in-one custom spreadsheet with API dropdown, template loader, and dynamic array - just import and use",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        },
+        "./styles": "./dist/styles.css"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch"
+    },
+    "dependencies": {
+        "@univerjs/core": "^0.6.6",
+        "@univerjs/design": "^0.6.6",
+        "@univerjs/docs": "^0.6.6",
+        "@univerjs/docs-ui": "^0.6.6",
+        "@univerjs/engine-formula": "^0.6.6",
+        "@univerjs/engine-render": "^0.6.6",
+        "@univerjs/sheets": "^0.6.6",
+        "@univerjs/sheets-formula": "^0.6.6",
+        "@univerjs/sheets-ui": "^0.6.6",
+        "@univerjs/ui": "^0.6.6",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "rxjs": "^7.8.1"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "tsup": "^8.0.0",
+        "typescript": "^5.0.0"
+    },
+    "keywords": [
+        "univer",
+        "spreadsheet",
+        "excel",
+        "api-dropdown",
+        "template-loader",
+        "dynamic-array"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/your-username/univer-custom-spreadsheet"
+    }
+}

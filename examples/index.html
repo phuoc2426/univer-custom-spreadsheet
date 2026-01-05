@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Univer Custom Plugins Demo</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+      }
+      #app {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <!-- Univer styles -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@univerjs/design/lib/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@univerjs/ui/lib/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@univerjs/sheets-ui/lib/index.css"
+    />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- Univer scripts -->
+    <script src="https://unpkg.com/@univerjs/core/lib/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/design/lib/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/engine-render/lib/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/engine-formula/lib/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/docs/lib/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/docs-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/sheets/lib/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/sheets-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/@univerjs/ui/lib/index.js"></script>
+
+    <!-- Custom plugins (after build) -->
+    <!-- <script src="./dist/index.js"></script> -->
+
+    <script type="module">
+      // Import from built bundle or use inline
+      // import { registerUniverCustomPlugins } from './dist/index.mjs';
+
+      const { Univer, UniverInstanceType, LocaleType } = UniverCore;
+      const { UniverRenderEnginePlugin } = UniverEngineRender;
+      const { UniverFormulaEnginePlugin } = UniverEngineFormula;
+      const { UniverDocsPlugin } = UniverDocs;
+      const { UniverDocsUIPlugin } = UniverDocsUI;
+      const { UniverSheetsPlugin } = UniverSheets;
+      const { UniverSheetsUIPlugin } = UniverSheetsUI;
+      const { UniverUIPlugin } = UniverUI;
+
+      // Configuration
+      const CONFIG = {
+        apiBaseUrl: "http://localhost:8000",
+        dropdownSources: [
+          {
+            id: "products",
+            name: "Products",
+            endpoint: "/dropdown/products",
+            displayField: "name",
+            valueField: "id",
+          },
+          {
+            id: "employees",
+            name: "Employees",
+            endpoint: "/dropdown/employees",
+            displayField: "name",
+            valueField: "id",
+          },
+        ],
+        templateApi: {
+          listEndpoint: "/templates",
+          getEndpoint: "/templates/{id}",
+        },
+        locale: "en",
+      };
+
+      // Create Univer
+      const univer = new Univer({
+        locale: LocaleType.EN_US,
+      });
+
+      // Register plugins
+      univer.registerPlugin(UniverRenderEnginePlugin);
+      univer.registerPlugin(UniverDocsPlugin);
+      univer.registerPlugin(UniverDocsUIPlugin);
+      univer.registerPlugin(UniverUIPlugin, { container: "app" });
+      univer.registerPlugin(UniverSheetsPlugin);
+      univer.registerPlugin(UniverSheetsUIPlugin);
+      univer.registerPlugin(UniverFormulaEnginePlugin);
+
+      // Register custom plugins (when built)
+      // registerUniverCustomPlugins(univer, CONFIG);
+
+      // Create workbook
+      univer.createUnit(UniverInstanceType.UNIVER_SHEET, {
+        id: "demo-workbook",
+        name: "Demo Workbook",
+        appVersion: "1.0.0",
+        locale: "en-US",
+        styles: {},
+        sheetOrder: ["sheet1"],
+        sheets: {
+          sheet1: {
+            id: "sheet1",
+            name: "Sheet1",
+            rowCount: 100,
+            columnCount: 20,
+            cellData: {},
+          },
+        },
+      });
+
+      console.log("Univer initialized:", univer);
+    </script>
+  </body>
+</html>
