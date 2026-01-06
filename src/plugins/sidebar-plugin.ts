@@ -78,18 +78,23 @@ export class SidebarPlugin extends Plugin {
 
     override onReady(): void {
         // Delay sidebar injection to ensure Univer UI is fully rendered
-        setTimeout(() => this._injectSidebar(), 100);
+        setTimeout(() => this._injectSidebar(), 300);
     }
 
     private _injectSidebar() {
-        // Find the Univer container
-        const univerContainer = document.querySelector('.univer-app-container') ||
-            document.querySelector('[class*="univer"]') ||
-            document.querySelector('#spreadsheet')?.firstElementChild;
+        // Find the spreadsheet container (the one passed to createSpreadsheet)
+        const spreadsheetContainer = document.querySelector('#spreadsheet') || 
+            document.querySelector('[id*="spreadsheet"]') ||
+            document.querySelector('.univer-app-container')?.parentElement;
 
-        if (!univerContainer) {
-            console.warn('[SidebarPlugin] Univer container not found, retrying...');
-            setTimeout(() => this._injectSidebar(), 200);
+        if (!spreadsheetContainer) {
+            console.warn('[SidebarPlugin] Spreadsheet container not found, retrying...');
+            setTimeout(() => this._injectSidebar(), 300);
+            return;
+        }
+
+        // Check if sidebar already exists
+        if (spreadsheetContainer.querySelector('.ucp-sidebar')) {
             return;
         }
 
@@ -104,22 +109,16 @@ export class SidebarPlugin extends Plugin {
 
         this._sidebarElement = createSidebar(callbacks);
 
-        // Create wrapper to contain sidebar + univer
-        const wrapper = document.createElement('div');
-        wrapper.className = 'ucp-main-wrapper';
-        wrapper.style.cssText = 'display: flex; width: 100%; height: 100%;';
+        // Make the spreadsheet container a flex container
+        (spreadsheetContainer as HTMLElement).style.cssText = 'display: flex; flex: 1; min-height: 0; overflow: hidden;';
 
-        // Clone univer's parent style
-        const parent = univerContainer.parentElement;
-        if (parent) {
-            // Insert wrapper
-            parent.insertBefore(wrapper, univerContainer);
-            wrapper.appendChild(this._sidebarElement);
-            wrapper.appendChild(univerContainer);
+        // Insert sidebar at the beginning
+        spreadsheetContainer.insertBefore(this._sidebarElement, spreadsheetContainer.firstChild);
 
-            // Ensure proper sizing
-            (univerContainer as HTMLElement).style.flex = '1';
-            (univerContainer as HTMLElement).style.minWidth = '0';
+        // Make sure Univer content takes remaining space
+        const univerContent = spreadsheetContainer.querySelector('.univer-app-container') as HTMLElement;
+        if (univerContent) {
+            univerContent.style.cssText = 'flex: 1; min-width: 0; height: 100%; overflow: hidden;';
         }
     }
 
