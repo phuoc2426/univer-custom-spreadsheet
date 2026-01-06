@@ -88,6 +88,7 @@ import { initApiService } from './services/api-service';
 import { ApiDropdownPlugin } from './plugins/api-dropdown-plugin';
 import { TemplateLoaderPlugin } from './plugins/template-loader-plugin';
 import { DynamicArrayPlugin } from './plugins/dynamic-array-plugin';
+import { SidebarPlugin } from './plugins/sidebar-plugin';
 
 // Re-export types
 export * from './types';
@@ -98,6 +99,7 @@ export { configStore } from './config-store';
 export { ApiDropdownPlugin } from './plugins/api-dropdown-plugin';
 export { TemplateLoaderPlugin } from './plugins/template-loader-plugin';
 export { DynamicArrayPlugin } from './plugins/dynamic-array-plugin';
+export { SidebarPlugin } from './plugins/sidebar-plugin';
 
 // Re-export Univer core for advanced use
 export { Univer, UniverInstanceType, LocaleType } from '@univerjs/core';
@@ -261,6 +263,7 @@ export function createSpreadsheet(config: CreateSpreadsheetConfig): SpreadsheetI
     initApiService(pluginConfig);
 
     // Register custom plugins
+    univer.registerPlugin(SidebarPlugin);
     univer.registerPlugin(ApiDropdownPlugin);
     univer.registerPlugin(TemplateLoaderPlugin);
     univer.registerPlugin(DynamicArrayPlugin);
@@ -311,6 +314,7 @@ export function registerUniverCustomPlugins(
 ): void {
     configStore.setConfig(config);
     initApiService(config);
+    univer.registerPlugin(SidebarPlugin);
     univer.registerPlugin(ApiDropdownPlugin);
     univer.registerPlugin(TemplateLoaderPlugin);
     univer.registerPlugin(DynamicArrayPlugin);
